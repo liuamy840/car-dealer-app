@@ -6,16 +6,25 @@ class Main extends Component {
   render() {
     return (
       <div className="main">
-        <h2>Vehicles</h2>
+        <h2 className="title">Vehicles</h2>
         <div className="grid-container"> 
           <div>
-            1
+            <img src="https://logo.clearbit.com/honda.com" />
+            <p>Year: 2013</p>
+            <p>Make: </p>
+            <p>Model: Honda CR-V</p>
           </div>
           <div>
-            2
+            <img src="https://logo.clearbit.com/bmwusa.com" />
+            <p>Year: 2013</p>
+            <p>Make: </p>
+            <p>Model: Honda CR-V</p>
           </div>
           <div>
-            3
+            <img src="https://logo.clearbit.com/toyota.com" />
+            <p>Year: 2013</p>
+            <p>Make: </p>
+            <p>Model: Honda CR-V</p>
           </div>
         </div>
         <div className="pagination-container">
