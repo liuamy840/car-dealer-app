@@ -7,26 +7,24 @@ import Main from './Main';
 class App extends Component {
   
   componentDidMount() {
-    // this.fetchData();
+    this.fetchData();
   }
 
   fetchData = () => {
 
-    let url = 'http://api.coxauto-interview.com/api/datasetId';
+    return fetch('/api/datasetId', {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+            })
+            .then(response => response.json())
+            .catch(error => console.error('Error:', error))
+            .then(response => console.log('Success:', JSON.stringify(response)));
 
-    // return fetch('http://api.coxauto-interview.com/api/datasetId', {
-    //           method: 'GET',
-    //           mode: 'cors',
-    //           cache: 'default',
-    //           credentials: 'same-origin',
-    //         })
-    //         .then(response => response.json())
-    //         .catch(error => console.error('Error:', error))
-    //         .then(response => console.log('Success:', JSON.stringify(response)));
-
-    return axios.get('http://api.coxauto-interview.com/api/datasetId')
-      .then(response => console.log('Response:', response))
-      .catch(error => console.log('Error', error));
+    // return axios.get('/api/datasetId')
+    //   .then(response => console.log('Response:', response))
+    //   .catch(error => console.log('Error', error));
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {

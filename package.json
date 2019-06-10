@@ -3,19 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "http-proxy-middleware": "^0.19.1",
     "proxy-middleware": "^0.15.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
-    "react-scripts": "0.9.5"
+    "react-scripts": "^2.0.3"
   },
   "devDependencies": {
     "axios": "^0.18.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "url": "^0.11.0"
   },
+  "proxy": "http://api.coxauto-interview.com/",
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
