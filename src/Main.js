@@ -11,8 +11,8 @@ class Main extends Component {
           <div>
             <img src="https://logo.clearbit.com/honda.com" />
             <p>Year: 2013</p>
-            <p>Make: </p>
-            <p>Model: Honda CR-V</p>
+            <p>Make: Honda</p>
+            <p>Model: CR-V</p>
           </div>
           <div>
             <img src="https://logo.clearbit.com/bmwusa.com" />

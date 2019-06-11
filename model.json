@@ -1,0 +1,113 @@
+{
+  "dealers": [
+    {
+      "dealerId": 0,
+      "name": "James Smith",
+      "vehicles": [
+        {
+          "vehicleId": 10,
+          "year": 2013,
+          "make": "Honda",
+          "model": "CR-V"
+        }, {
+          "vehicleId": 11,
+          "year": 2019,
+          "make": "Audi",
+          "model": "A3"
+        }, {
+          "vehicleId": 12,
+          "year": 2013,
+          "make": "BMW",
+          "model": "1 Series"
+        }, {
+          "vehicleId": 13,
+          "year": 2019,
+          "make": "Buick",
+          "model": "Cascada"
+        }, {
+          "vehicleId": 14,
+          "year": 2018,
+          "make": "Cadillac",
+          "model": "ATS"
+        }, {
+          "vehicleId": 15,
+          "year": 2011,
+          "make": "Chevrolet",
+          "model": "Aveo"
+        }
+      ]
+    }, {
+      "dealerId": 1,
+      "name": "Jane Brown",
+      "vehicles": [
+        {
+          "vehicleId": 16,
+          "year": 2014,
+          "make": "Dodge",
+          "model": "Avenger"
+        }, {
+          "vehicleId": 17,
+          "year": 2011,
+          "make": "Ford",
+          "model": "Crown Victoria"
+        }, {
+          "vehicleId": 18,
+          "year": 2019,
+          "make": "Hyundai",
+          "model": "Accent"
+        }, {
+          "vehicleId": 19,
+          "year": 2012,
+          "make": "INFINITI",
+          "model": "G25"
+        }, {
+          "vehicleId": 20,
+          "year": 2019,
+          "make": "Jeep",
+          "model": "Cherokee"
+        }, {
+          "vehicleId": 21,
+          "year": 2009,
+          "make": "Kia",
+          "model": "Amanti"
+        }
+      ]
+    }, {
+      "dealerId": 2,
+      "name": "Jon Keve",
+      "vehicles": [
+        {
+          "vehicleId": 22,
+          "year": 2017,
+          "make": "Lexus",
+          "model": "CT Hybrid"
+        }, {
+          "vehicleId": 23,
+          "year": 2019,
+          "make": "Lincoln",
+          "model": "Continental"
+        }, {
+          "vehicleId": 24,
+          "year": 2020,
+          "make": "Mazda",
+          "model": "CX-30"
+        }, {
+          "vehicleId": 25,
+          "year": 2019,
+          "make": "Volkswagen",
+          "model": "Arteon"
+        }, {
+          "vehicleId": 26,
+          "year": 2019,
+          "make": "Porsche",
+          "model": "718 Boxster"
+        }, {
+          "vehicleId": 27,
+          "year": 2019,
+          "make": "Toyota",
+          "model": "86"
+        }
+      ]
+    }
+  ]
+}
