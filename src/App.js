@@ -1,83 +1,92 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 import Main from './Main';
 
 class App extends Component {
 
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      datasetId: '',
+      datasetBody: {},
+      dealerId: 0,
+      vehicleId: null
+    }
+  }
   
   componentDidMount() {
-    this.fetchData();
-  }
 
-  /**
-   * @function fetchData
-   * @description fetch the datasetId
-   */
-  fetchData = () => {
+    const { datasetBody, datasetId, dealerId, vehicleId } = this.state;
 
-    let datasetId = '';
-    let datasetBody = {};
-    let dealerId = 0;
-    let vehicleId;
-
-    const getDatasetId = fetch('/api/datasetId', {
+    const getDatasetId = () => fetch('/api/datasetId', {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
             });
 
-    const getDatasetBody = fetch('./model.json', {
+    const getDatasetBody = () => fetch('./model.json', {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
-          })
+          });
 
-    const postDataset =  axios({
-              method: 'post',
-              url: `/api/{datasetId}/answer`,
-              data: datasetBody,
-            });
+    const postDataset =  () => fetch(`/api/{datasetId}/answer`, {
+            method: 'POST', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow', 
+            referrer: 'no-referrer', 
+            body: JSON.stringify(datasetBody), 
+        });
 
-    const getDealerInfo = fetch(`/api/{datasetId}/dealers/{dealerId}`, {
+    const getDealerInfo = () => fetch(`/api/{datasetId}/dealers/{dealerId}`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
-    });
+        });
 
-    const getVehicleIdList = fetch(`/api/{datasetId}/vehicles`, {
+    const getVehicleIdList = () => fetch(`/api/{datasetId}/vehicles`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
-    });
+        });
 
-    const getVehicleInfo = fetch(`/api/{datasetId}/vehicles/{vehicleId}`, {
+    const getVehicleInfo = () => fetch(`/api/{datasetId}/vehicles/{vehicleId}`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
-    });
+        });
 
+    getDatasetId()
+        .then(response => response.json())
+        .then(data => {
+          console.log('DatasetId: ', data);
+          this.setState({
+            datasetId: data.datasetId
+          });
+        })
+        .catch(error => console.error('Error:', error))
 
-    return fetch('/api/datasetId', {
-              method: 'GET',
-              mode: 'cors',
-              cache: 'default',
-              credentials: 'same-origin',
-            })
-            .then(response => response.json())
-            .catch(error => console.error('Error:', error))
-            .then(response => console.log('Success:', JSON.stringify(response)));
+    getDatasetBody()
+      .then(response => response.json())
+      .then(data => {
+        console.log('Dataset Body: ', data);
+        this.setState({
+          datasetBody: data
+        });
+      })
+      .catch(error => console.error('Error:', error))
 
-    // return axios.get('/api/datasetId')
-    //   .then(response => console.log('Response:', response))
-    //   .catch(error => console.log('Error', error));
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
