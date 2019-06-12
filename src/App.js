@@ -5,12 +5,65 @@ import axios from 'axios';
 import Main from './Main';
 
 class App extends Component {
+
+
   
   componentDidMount() {
     this.fetchData();
   }
 
+  /**
+   * @function fetchData
+   * @description fetch the datasetId
+   */
   fetchData = () => {
+
+    let datasetId = '';
+    let datasetBody = {};
+    let dealerId = 0;
+    let vehicleId;
+
+    const getDatasetId = fetch('/api/datasetId', {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+            });
+
+    const getDatasetBody = fetch('./model.json', {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+          })
+
+    const postDataset =  axios({
+              method: 'post',
+              url: `/api/{datasetId}/answer`,
+              data: datasetBody,
+            });
+
+    const getDealerInfo = fetch(`/api/{datasetId}/dealers/{dealerId}`, {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+    });
+
+    const getVehicleIdList = fetch(`/api/{datasetId}/vehicles`, {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+    });
+
+    const getVehicleInfo = fetch(`/api/{datasetId}/vehicles/{vehicleId}`, {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
+    });
+
 
     return fetch('/api/datasetId', {
               method: 'GET',
