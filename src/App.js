@@ -33,7 +33,7 @@ class App extends Component {
               credentials: 'same-origin',
           });
 
-    const postDataset =  () => fetch(`/api/{datasetId}/answer`, {
+    const postDataset =  () => fetch(`/api/${datasetId}/answer`, {
             method: 'POST', 
             mode: 'cors', 
             cache: 'no-cache', 
@@ -46,21 +46,21 @@ class App extends Component {
             body: JSON.stringify(datasetBody), 
         });
 
-    const getDealerInfo = () => fetch(`/api/{datasetId}/dealers/{dealerId}`, {
+    const getDealerInfo = () => fetch(`/api/${datasetId}/dealers/{dealerId}`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
         });
 
-    const getVehicleIdList = () => fetch(`/api/{datasetId}/vehicles`, {
+    const getVehicleIdList = () => fetch(`/api/${datasetId}/vehicles`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
               credentials: 'same-origin',
         });
 
-    const getVehicleInfo = () => fetch(`/api/{datasetId}/vehicles/{vehicleId}`, {
+    const getVehicleInfo = () => fetch(`/api/${datasetId}/vehicles/${vehicleId}`, {
               method: 'GET',
               mode: 'cors',
               cache: 'default',
@@ -75,7 +75,7 @@ class App extends Component {
             datasetId: data.datasetId
           });
         })
-        .catch(error => console.error('Error:', error))
+        .catch(error => console.error('Error:', error));
 
     getDatasetBody()
       .then(response => response.json())
@@ -85,11 +85,35 @@ class App extends Component {
           datasetBody: data
         });
       })
-      .catch(error => console.error('Error:', error))
+      .catch(error => console.error('Error:', error));
+
 
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+
+    const { datasetId, datasetBody } = this.state;
+
+    if (datasetId !== prevState.datasetId) {
+      const postDataset =  () => fetch(`/api/${datasetId}/answer`, {
+            method: 'POST', 
+            mode: 'cors', 
+            cache: 'no-cache', 
+            credentials: 'same-origin', 
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            redirect: 'follow', 
+            referrer: 'no-referrer', 
+            body: JSON.stringify(datasetBody), 
+        });
+
+    postDataset()
+      .then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error));
+
+    }
 
   }
   
