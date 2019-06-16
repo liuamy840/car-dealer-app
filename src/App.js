@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Main from './Main';
+import axios from 'axios';
 
 class App extends Component {
 
@@ -95,7 +96,8 @@ class App extends Component {
     const { datasetId, datasetBody } = this.state;
 
     if (datasetId !== prevState.datasetId) {
-      const postDataset =  () => fetch(`/api/${datasetId}/answer`, {
+      let cheatDatasetId = 'ArK2aQHx1gg';
+      const postDataset =  () => fetch(`/api/${cheatDatasetId}/answer`, {
             method: 'POST', 
             mode: 'cors', 
             cache: 'no-cache', 
@@ -113,6 +115,17 @@ class App extends Component {
       .then(response => console.log('Success:', JSON.stringify(response)))
       .catch(error => console.error('Error:', error));
 
+    //   axios({
+    //       method: 'post',
+    //       url: `/api/${cheatDatasetId}/answer`,
+    //       data: datasetBody
+    //     })
+    //     .then(function (response) {
+    //       console.log('Success: ', response);
+    //     })
+    //     .catch(function (error) {
+    //       console.log('Error: ', error);
+    //     });
     }
 
   }
