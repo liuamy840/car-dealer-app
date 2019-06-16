@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Main from './Main';
-import axios from 'axios';
 
 class App extends Component {
 
@@ -11,8 +10,10 @@ class App extends Component {
     this.state = {
       datasetId: '',
       datasetBody: {},
-      dealerId: 0,
-      vehicleId: null
+      isDatasetPosted: false,
+      dealerInfo: null,
+      vehicleIds: [],
+      vehicleInfoArr: []
     }
   }
   
@@ -33,40 +34,6 @@ class App extends Component {
               cache: 'default',
               credentials: 'same-origin',
           });
-
-    const postDataset =  () => fetch(`/api/${datasetId}/answer`, {
-            method: 'POST', 
-            mode: 'cors', 
-            cache: 'no-cache', 
-            credentials: 'same-origin', 
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow', 
-            referrer: 'no-referrer', 
-            body: JSON.stringify(datasetBody), 
-        });
-
-    const getDealerInfo = () => fetch(`/api/${datasetId}/dealers/{dealerId}`, {
-              method: 'GET',
-              mode: 'cors',
-              cache: 'default',
-              credentials: 'same-origin',
-        });
-
-    const getVehicleIdList = () => fetch(`/api/${datasetId}/vehicles`, {
-              method: 'GET',
-              mode: 'cors',
-              cache: 'default',
-              credentials: 'same-origin',
-        });
-
-    const getVehicleInfo = () => fetch(`/api/${datasetId}/vehicles/${vehicleId}`, {
-              method: 'GET',
-              mode: 'cors',
-              cache: 'default',
-              credentials: 'same-origin',
-        });
 
     getDatasetId()
         .then(response => response.json())
@@ -93,39 +60,101 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    const { datasetId, datasetBody } = this.state;
+    const { datasetId, datasetBody, isDatasetPosted, vehicleIds } = this.state;
+    const cheatDatasetId = 'ArK2aQHx1gg';
+    const cheatDealerId = '968316708';
+
+    const postDataset =  () => fetch(`/api/${cheatDatasetId}/answer`, {
+          method: 'POST', 
+          mode: 'cors', 
+          cache: 'no-cache', 
+          credentials: 'same-origin', 
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          redirect: 'follow', 
+          referrer: 'no-referrer', 
+          body: JSON.stringify(datasetBody), 
+      });
+
+    const getDealerInfo = () => fetch(`/api/${cheatDatasetId}/dealers/${cheatDealerId}`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'default',
+          credentials: 'same-origin',
+    });
+
+    const getVehicleIdList = () => fetch(`/api/${cheatDatasetId}/vehicles`, {
+          method: 'GET',
+          mode: 'cors',
+          cache: 'default',
+          credentials: 'same-origin',
+    });
 
     if (datasetId !== prevState.datasetId) {
-      let cheatDatasetId = 'ArK2aQHx1gg';
-      const postDataset =  () => fetch(`/api/${cheatDatasetId}/answer`, {
-            method: 'POST', 
-            mode: 'cors', 
-            cache: 'no-cache', 
-            credentials: 'same-origin', 
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            redirect: 'follow', 
-            referrer: 'no-referrer', 
-            body: JSON.stringify(datasetBody), 
+
+      // start to post dataset with cheatDatasetId due to datasetId keeping changing
+      postDataset()
+        .then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .then( () => {
+          this.setState({
+            isDatasetPosted: true
+          });
+        })
+        .catch(error => console.error('Error:', error));
+
+    }
+
+    if (isDatasetPosted && isDatasetPosted !== prevState.isDatasetPosted ) {
+
+      // start to get dealers information
+      getDealerInfo()
+        .then(response => response.json())
+        .then(data => {
+          console.log('Dealer Info: ', data);
+          this.setState({
+            dealerInfo: data
+          });
+        })
+        .catch(error => console.error('Error:', error));
+
+      getVehicleIdList()
+        .then(response => response.json())
+        .then(data => {
+          console.log('Vehicle ID list: ', data);
+          this.setState({
+            vehicleIds: data.vehicleIds
+          });
+        })
+        .catch(error => console.error('Error:', error));
+
+    }
+
+    if (vehicleIds.length > 0 && vehicleIds !== prevState.vehicleIds) {
+      vehicleIds.forEach( vehicleId => {
+        const getVehicleInfo = () => fetch(`/api/${cheatDatasetId}/vehicles/${vehicleId}`, {
+              method: 'GET',
+              mode: 'cors',
+              cache: 'default',
+              credentials: 'same-origin',
         });
 
-    postDataset()
-      .then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error));
+        getVehicleInfo()
+          .then(response => response.json())
+          .then(data => {
+            console.log('Vehicle Info: ', data);
+            if (JSON.stringify(data.dealerId) === cheatDealerId) {
+              console.log('Vehicle Info 968316708: ', data);
+              this.setState((prevState) => {
+                vehicleInfoArr: prevState.vehicleInfoArr.push(data)
+              });
+            }
 
-    //   axios({
-    //       method: 'post',
-    //       url: `/api/${cheatDatasetId}/answer`,
-    //       data: datasetBody
-    //     })
-    //     .then(function (response) {
-    //       console.log('Success: ', response);
-    //     })
-    //     .catch(function (error) {
-    //       console.log('Error: ', error);
-    //     });
+          })
+          .catch(error => console.error('Error:', error));
+
+      })
     }
 
   }
