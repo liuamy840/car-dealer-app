@@ -146,6 +146,11 @@ class App extends Component {
           .then(data => {
             if (JSON.stringify(data.dealerId) === cheatDealerId) {
               vehicleInfoArr.push(data);
+
+              this.setState({
+                vehicles: vehicleInfoArr
+              });
+
             }
 
           })
@@ -160,6 +165,7 @@ class App extends Component {
     }
 
   }
+
   
   render() {
 
@@ -168,7 +174,6 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           {dealerInfo && <h2>{dealerInfo.dealerId} - {dealerInfo.name}</h2>}
         </div>
         <Main vehicles={vehicles} />

@@ -5,15 +5,13 @@ class Main extends Component {
 
   constructor(props) {
     super(props);
-
-
   }
 
   render() {
     const { vehicles } = this.props;
-    
+
     const vehicleList = vehicles.map(vehicle => 
-        (<div>
+        (<div key={vehicle.vehicleId}>
             <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} />
             <p>Year: {vehicle.year}</p>
             <p>Make: {vehicle.make}</p>
