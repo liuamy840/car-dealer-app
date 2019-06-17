@@ -11,12 +11,14 @@ class Main extends Component {
     const { vehicles } = this.props;
 
     const vehicleList = vehicles.map(vehicle => 
-        (<div key={vehicle.vehicleId}>
-            <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} />
+        <div key={vehicle.vehicleId} className="vehicle-container">
+            <div className="image-container">
+              <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} />
+            </div>
             <p>Year: {vehicle.year}</p>
             <p>Make: {vehicle.make}</p>
             <p>Model: {vehicle.model}</p>
-        </div>)
+        </div>
       );
 
     return (
@@ -28,11 +30,6 @@ class Main extends Component {
         <div className="pagination-container">
           <a href="#">&laquo;</a>
           <a href="#">1</a>
-          <a href="#">2</a>
-          <a href="#">3</a>
-          <a href="#">4</a>
-          <a href="#">5</a>
-          <a href="#">6</a>
           <a href="#">&raquo;</a>
         </div>
       </div>

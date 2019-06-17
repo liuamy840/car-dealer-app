@@ -1,5 +1,18 @@
 .title {
   text-align: center;
+  min-height: 100px;
+}
+
+.image-container {
+	height: 50%;
+	position: relative;
+}
+
+img {
+  position: absolute;
+  left: 50%;
+  right: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .grid-container {
@@ -8,8 +21,9 @@
 }
 
 .pagination-container {
-  display: inline-block;
-  float: right;
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
   padding: 10px;
 }
 
