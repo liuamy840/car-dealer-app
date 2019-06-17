@@ -38,7 +38,6 @@ class App extends Component {
     getDatasetId()
         .then(response => response.json())
         .then(data => {
-          console.log('DatasetId: ', data);
           this.setState({
             datasetId: data.datasetId
           });
@@ -48,7 +47,6 @@ class App extends Component {
     getDatasetBody()
       .then(response => response.json())
       .then(data => {
-        console.log('Dataset Body: ', data);
         this.setState({
           datasetBody: data
         });
@@ -112,7 +110,6 @@ class App extends Component {
       getDealerInfo()
         .then(response => response.json())
         .then(data => {
-          console.log('Dealer Info: ', data);
           this.setState({
             dealerInfo: data
           });
@@ -122,7 +119,6 @@ class App extends Component {
       getVehicleIdList()
         .then(response => response.json())
         .then(data => {
-          console.log('Vehicle ID list: ', data);
           this.setState({
             vehicleIds: data.vehicleIds
           });
@@ -157,10 +153,6 @@ class App extends Component {
           .catch(error => console.error('Error:', error));
 
       })
-
-      this.setState({
-        vehicles: vehicleInfoArr
-      });
 
     }
 
