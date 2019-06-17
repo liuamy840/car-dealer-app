@@ -13,7 +13,7 @@ class App extends Component {
       isDatasetPosted: false,
       dealerInfo: null,
       vehicleIds: [],
-      vehicleInfoArr: []
+      vehicles: []
     }
   }
   
@@ -132,6 +132,7 @@ class App extends Component {
     }
 
     if (vehicleIds.length > 0 && vehicleIds !== prevState.vehicleIds) {
+      let vehicleInfoArr = [];
       vehicleIds.forEach( vehicleId => {
         const getVehicleInfo = () => fetch(`/api/${cheatDatasetId}/vehicles/${vehicleId}`, {
               method: 'GET',
@@ -143,30 +144,34 @@ class App extends Component {
         getVehicleInfo()
           .then(response => response.json())
           .then(data => {
-            console.log('Vehicle Info: ', data);
             if (JSON.stringify(data.dealerId) === cheatDealerId) {
-              console.log('Vehicle Info 968316708: ', data);
-              this.setState((prevState) => {
-                vehicleInfoArr: prevState.vehicleInfoArr.push(data)
-              });
+              vehicleInfoArr.push(data);
             }
 
           })
           .catch(error => console.error('Error:', error));
 
       })
+
+      this.setState({
+        vehicles: vehicleInfoArr
+      });
+
     }
 
   }
   
   render() {
+
+    const { dealerInfo, vehicles } = this.state;
+
     return (
       <div className="App">
         <div className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
-          <h2>DealerId</h2>
+          {dealerInfo && <h2>{dealerInfo.dealerId} - {dealerInfo.name}</h2>}
         </div>
-        <Main />
+        <Main vehicles={vehicles} />
       </div>
     );
   }

@@ -3,29 +3,29 @@ import './Main.css';
 
 class Main extends Component {
 
+  constructor(props) {
+    super(props);
+
+
+  }
+
   render() {
+    const { vehicles } = this.props;
+    
+    const vehicleList = vehicles.map(vehicle => 
+        (<div>
+            <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} />
+            <p>Year: {vehicle.year}</p>
+            <p>Make: {vehicle.make}</p>
+            <p>Model: {vehicle.model}</p>
+        </div>)
+      );
+
     return (
       <div className="main">
         <h2 className="title">Vehicles</h2>
         <div className="grid-container"> 
-          <div>
-            <img src="https://logo.clearbit.com/honda.com" />
-            <p>Year: 2013</p>
-            <p>Make: Honda</p>
-            <p>Model: CR-V</p>
-          </div>
-          <div>
-            <img src="https://logo.clearbit.com/bmwusa.com" />
-            <p>Year: 2013</p>
-            <p>Make: </p>
-            <p>Model: Honda CR-V</p>
-          </div>
-          <div>
-            <img src="https://logo.clearbit.com/toyota.com" />
-            <p>Year: 2013</p>
-            <p>Make: </p>
-            <p>Model: Honda CR-V</p>
-          </div>
+          {vehicleList}
         </div>
         <div className="pagination-container">
           <a href="#">&laquo;</a>
