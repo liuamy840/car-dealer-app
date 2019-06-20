@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Main from './Main';
 
@@ -18,8 +17,6 @@ class App extends Component {
   }
   
   componentDidMount() {
-
-    const { datasetBody, datasetId, dealerId, vehicleId } = this.state;
 
     const getDatasetId = () => fetch('/api/datasetId', {
               method: 'GET',

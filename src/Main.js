@@ -3,23 +3,29 @@ import './Main.css';
 
 class Main extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { vehicles } = this.props;
 
     const vehicleList = vehicles.map(vehicle => 
-        <div key={vehicle.vehicleId} className="vehicle-container">
+        (<div key={vehicle.vehicleId} className="vehicle-container">
             <div className="image-container">
-              <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} />
+              <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} 
+                   alt="Car Logo" />
             </div>
             <p>Year: {vehicle.year}</p>
             <p>Make: {vehicle.make}</p>
             <p>Model: {vehicle.model}</p>
-        </div>
+         </div>
+        )
       );
+
+    const pages = Math.ceil(vehicles.length / 3);
+    const pageLinks = [];
+    for (let i = 0; i < pages; i++) {
+      pageLinks.push(
+        <a key={`link-${i}`} href="javascript:void(0);">{i + 1}</a>
+      );
+    }
 
     return (
       <div className="main">
@@ -28,12 +34,12 @@ class Main extends Component {
           {vehicleList}
         </div>
         <div className="pagination-container">
-          <a href="#">&laquo;</a>
-          <a href="#">1</a>
-          <a href="#">&raquo;</a>
+          <a href="javascript:void(0);">&laquo;</a>
+          {pageLinks}
+          <a href="javascript:void(0);">&raquo;</a>
         </div>
       </div>
-    )
+    );
   }
 
 }
