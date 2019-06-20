@@ -10,7 +10,7 @@ class Main extends Component {
         (<div key={vehicle.vehicleId} className="vehicle-container">
             <div className="image-container">
               <img src={`https://logo.clearbit.com/${vehicle.make.toLowerCase()}.com`} 
-                   alt="Car Logo" />
+                   alt={vehicle.make} />
             </div>
             <p>Year: {vehicle.year}</p>
             <p>Make: {vehicle.make}</p>
