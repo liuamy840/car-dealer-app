@@ -23,7 +23,7 @@ class Main extends Component {
     const pageLinks = [];
     for (let i = 0; i < pages; i++) {
       pageLinks.push(
-        <a key={`link-${i}`} href="javascript:void(0);">{i + 1}</a>
+        <a key={`link-${i}`} href="#">{i + 1}</a>
       );
     }
 
@@ -34,9 +34,9 @@ class Main extends Component {
           {vehicleList}
         </div>
         <div className="pagination-container">
-          <a href="javascript:void(0);">&laquo;</a>
+          <a href="#">&laquo;</a>
           {pageLinks}
-          <a href="javascript:void(0);">&raquo;</a>
+          <a href="#">&raquo;</a>
         </div>
       </div>
     );
